@@ -232,6 +232,59 @@ function openDetails(id) {
     modal.classList.add('flex');
 }
 
+// FUNÇÃO PARA EDITAR/SALVAR NO MODAL
+function toggleEditModal() {
+    const textDiv = document.getElementById('modalResponse');
+    const btnEdit = document.getElementById('btnEditModal');
+    if (!textDiv || !btnEdit) return;
+
+    const isEditable = textDiv.contentEditable === "true";
+
+    if (!isEditable) {
+        // Habilitar Edição
+        textDiv.contentEditable = "true";
+        textDiv.classList.add('bg-white', 'ring-2', 'ring-indigo-500');
+        textDiv.focus();
+        btnEdit.innerText = "Salvar";
+        btnEdit.classList.add('text-emerald-600');
+    } else {
+        // Salvar Alteração no sessionStorage
+        const newText = textDiv.innerText;
+        updateDatabaseItem(currentModalItemId, newText);
+        
+        // Desabilitar Edição
+        textDiv.contentEditable = "false";
+        textDiv.classList.remove('bg-white', 'ring-2', 'ring-indigo-500');
+        btnEdit.innerText = "Editar";
+        btnEdit.classList.remove('text-emerald-600');
+        
+        showToast("Histórico atualizado!");
+    }
+}
+
+// FUNÇÃO PARA COPIAR TEXTO DO MODAL
+function copyModalResponse() {
+    const text = document.getElementById('modalResponse').innerText;
+    if (!text) return;
+    
+    navigator.clipboard.writeText(text).then(() => {
+        showToast("Copiado do modal!");
+    });
+}
+
+// FUNÇÃO AUXILIAR PARA ATUALIZAR O DB (Verifique se ela existe)
+function updateDatabaseItem(id, newText) {
+    let db = JSON.parse(sessionStorage.getItem('db')) || [];
+    db = db.map(item => {
+        if (item.id === id) {
+            return { ...item, resposta_sugerida: newText };
+        }
+        return item;
+    });
+    sessionStorage.setItem('db', JSON.stringify(db));
+    if (typeof renderHistory === 'function') renderHistory(); // Atualiza a tabela ao fundo
+}
+
 function closeModal() {
     document.getElementById('emailModal').classList.replace('flex', 'hidden');
 }

@@ -537,7 +537,7 @@
         if(fileInput.files[0]) formData.append('arquivo', fileInput.files[0]);
         
 try {
-    const response = await fetch('http://127.0.0.1:8000/classificar', { method: 'POST', body: formData });
+    const response = await fetch('/classificar', { method: 'POST', body: formData });
     const data = await response.json();
     
 

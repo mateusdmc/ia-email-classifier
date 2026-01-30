@@ -4,6 +4,7 @@ import io
 import json
 import fitz  # PyMuPDF
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
+from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 from groq import Groq
 
@@ -18,6 +19,13 @@ app.add_middleware(
 
 # Chave Groq
 client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
+
+@app.get("/", response_class=HTMLResponse)
+async def serve_index():
+    # Caminho absoluto para evitar erros na Vercel
+    path = os.path.join(os.path.dirname(__file__), "..", "templates", "index.html")
+    with open(path, "r", encoding="utf-8") as f:
+        return f.read()
 
 def extrair_texto_pdf(conteudo_arquivo: bytes) -> str:
     doc = fitz.open(stream=conteudo_arquivo, filetype="pdf")

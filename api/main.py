@@ -5,6 +5,7 @@ import json
 import fitz  # PyMuPDF
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from groq import Groq
 
@@ -19,6 +20,15 @@ app.add_middleware(
 
 # Chave Groq
 client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
+
+# Descobre onde o main.py está
+base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Monta os caminhos corretamente
+static_dir = os.path.join(base_dir, "static")
+templates_dir = os.path.join(base_dir, "templates")
+
+app.mount("/static", StaticFiles(directory=static_dir), name="static")
 
 @app.get("/", response_class=HTMLResponse)
 async def serve_index():

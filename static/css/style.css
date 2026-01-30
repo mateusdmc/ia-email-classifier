@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+body { 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+    scroll-behavior: smooth;
+}
+
+.tab-content { display: none; }
+
+.icon-vermais {
+    display: none;
+}
+
+.tab-content.active { 
+    display: block; 
+    animation: fadeIn 0.3s ease-out; 
+}
+
+@keyframes fadeIn { 
+    from { opacity: 0; transform: translateY(5px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
+
+.sidebar-item.active { 
+    background: #f1f5f9; 
+    color: #4f46e5; 
+    border-left: 4px solid #4f46e5; 
+}
+
+.glass { 
+    background: rgba(255, 255, 255, 0.8); 
+    backdrop-filter: blur(12px); 
+}
+
+#confidenceBar { transition: width 1s ease-in-out; }
+
+/* Media Queries */
+@media (max-width: 1024px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.3s ease; }
+    .sidebar.open { transform: translateX(0); }
+}
+
+@media (max-width: 640px) {
+    table thead { display: none; }
+    .hidden_verdetalhes { display: none; }
+    .icon-vermais { display: block; }
+    
+    table tbody tr {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-rows: auto auto;
+        grid-template-areas: 
+            "remetente botao"
+            "classificacao botao";
+        gap: 0.5rem 1rem;
+        padding: 1rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 0.75rem;
+        margin-bottom: 0.75rem;
+        background-color: white;
+        align-items: start;
+    }
+    
+    table, tbody { display: block; }
+    
+    table td {
+        padding: 0 !important;
+        border: none !important;
+    }
+    
+    table tbody td:nth-child(1) {
+        grid-area: remetente;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    
+    table tbody td:nth-child(2) {
+        grid-area: classificacao;
+        text-align: left;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: 0.5rem;
+    }
+    
+    table tbody td:nth-child(3) { display: none; }
+    
+    table tbody td:nth-child(4) {
+        grid-area: botao;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        height: 100%;
+    }
+    
+    .view-details {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.7rem;
+        white-space: nowrap;
+    }
+    
+    table tbody td:nth-child(2) span[class*="bg-"] {
+        padding: 0.25rem 0.75rem;
+        font-size: 0.65rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        border-radius: 0.5rem;
+        display: inline-block;
+    }
+    
+    table tbody tr:hover {
+        background-color: #f8fafc;
+        border-color: #cbd5e1;
+    }
+}

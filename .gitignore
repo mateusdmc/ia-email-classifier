@@ -1,0 +1,8 @@
+# Ignorar as configurações personalizadas do VS Code
+.vscode/
+
+# Ignorar o workspace do VS Code
+*.code-workspace
+
+# Opcional: Ignorar extensões instaladas localmente (raro, mas acontece)
+.history/

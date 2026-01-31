@@ -1,10 +1,17 @@
-# 📝 AI Email Classifier
+# AI Email Classifier
 
 O **AI Email Classifier** é uma solução inteligente para triagem de e-mails. Utilizando a API da **Groq**, a aplicação analisa o conteúdo de e-mails, classifica-os entre **Produtivo** ou **Improdutivo**, e sugere uma resposta formal automática.
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Landing Page - Preview
+
+![capa (capa)](./static/img/aplicacao-img.png)
+
+- Projeto online - **[Vercel](https://ia-email-classifier.vercel.app/)**
+- Observação: A aplicação usa sessionStorage para simular um banco de dados. Ao encerrar a sessão, os dados analisados serão perdidos.  
+
+## Tecnologias Utilizadas
 
 - **Backend**: [FastAPI](https://fastapi.tiangolo.com/) (Python)
 - **IA**: [Groq Cloud](https://console.groq.com/) (Modelo Llama 3.3 70b)
@@ -12,7 +19,7 @@ O **AI Email Classifier** é uma solução inteligente para triagem de e-mails. 
 
 ---
 
-## 📂 Estrutura de Pastas
+## Estrutura de Pastas
 
 ```text
 ├── api/
@@ -29,7 +36,7 @@ O **AI Email Classifier** é uma solução inteligente para triagem de e-mails. 
 
 ---
 
-## 📦 Instalação e Execução Local
+## Instalação e Execução Local
 
 Siga os passos abaixo para rodar o projeto em sua máquina:
 
@@ -38,7 +45,7 @@ Siga os passos abaixo para rodar o projeto em sua máquina:
 git clone https://github.com/mateusdmc/ia-email-classifier.git
 ```
 
-### 2. Acesse o diretorio do projeto 
+### 2. Acesse o diretório do projeto 
 ```bash
 cd ia-email-classifier
 ```
